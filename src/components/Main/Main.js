@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Card from "../Card/Card"
 import './main.scss';
 import axios from 'axios';
+import ActionButton from "../ActionButton/ActionButton";
 
 const Main = () => {
 
@@ -41,6 +42,8 @@ const Main = () => {
     return(
         <div>
             { drink && <Card drink={drink}></Card>}
+            <ActionButton type="delete" />
+            <ActionButton type="save" />
         </div>
     )
 };
