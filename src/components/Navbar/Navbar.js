@@ -6,7 +6,7 @@ function Navbar() {
     return(
         <header>
             <div className="logo">
-                <img src={logo} width="150" height="50" />
+                <img src={logo} alt="Logo" width="150" height="50" />
             </div>
             <nav>
                 <ul>

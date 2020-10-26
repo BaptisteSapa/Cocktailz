@@ -6,6 +6,7 @@ import axios from 'axios';
 const Main = () => {
 
     const [drink, setDrink] = useState("");
+    const [drinkInit, setDrinkInit] = useState(false);
 
     useEffect(() => {
 
@@ -31,13 +32,16 @@ const Main = () => {
             });
         };
 
-        fetchDrinks();
-    });
+        if(!drinkInit){
+            fetchDrinks();
+            setDrinkInit(true);
+        }
+    }, [drinkInit]);
 
     return(
-        <main>
-            <Card/>
-        </main>
+        <div>
+            { drink && <Card drink={drink}></Card>}
+        </div>
     )
 };
 

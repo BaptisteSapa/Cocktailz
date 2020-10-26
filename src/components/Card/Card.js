@@ -1,43 +1,50 @@
 import React from 'react';
 import './card.scss';
-import Main from "../Main/Main";
 
 const Card = (props) => {
 
-    const ingredients = () => {
+    var arrayIngredient = Object.keys(props.drink).filter(function(k) {
+        return k.indexOf('strIngredient') === 0;
+    }).reduce(function(newData, k) {
+        newData[k] = props.drink[k];
+        return newData;
+    }, {});
 
+    var arrayMeasure = Object.values(Object.keys(props.drink).filter(function(k) {
+        return k.indexOf('strMeasure') === 0;
+    }).reduce(function(newData, k) {
+        newData[k] = props.drink[k];
+        return newData;
+    }, {}));
 
+    const finalArray = [];
 
-        return ingredients;
-    };
-
+    Object.values(arrayIngredient).forEach((value, index) => {
+        if (value) {
+            finalArray.push({
+                mesure: arrayMeasure[index],
+                ingredient: value
+            })
+        }
+    });
+        
     return(
         <article>
             <div>
-                <img src={props.strDrinkThumb} alt=""/>
+                <img src={props.drink.strDrinkThumb} alt=""/>
             </div>
             <div>
-                <h2 className="title">{props.strDrink}</h2>
+                <h2 className="title">{props.drink.strDrink}</h2>
                 <div>
-                    <div className="category">{props.strCategory}</div>
-                    <div className="instructions">{props.instructions}</div>
+                    <div className="category">{props.drink.strCategory}</div>
+                    <div className="instructions">{props.drink.instructions}</div>
                     <ul>
-                        {props.map((number) =>
-                            <ListItem key={number.toString()}
-                                      value={number} />
+                        {finalArray.map((value, index) =>
+                            <li key={index} >
+                                <span className="ingredient">{value.mesure}</span>
+                                <span className="quantity">{value.ingredient}</span>
+                            </li>
                         )}
-                        <li>
-                            <span className="ingredient">Coffee</span>
-                            <span className="quantity">8 oz</span>
-                        </li>
-                        <li>
-                            <span className="ingredient">Coffee</span>
-                            <span className="quantity">8 oz</span>
-                        </li>
-                        <li>
-                            <span className="ingredient">Coffee</span>
-                            <span className="quantity">8 oz</span>
-                        </li>
                     </ul>
                 </div>
             </div>
