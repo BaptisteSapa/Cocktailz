@@ -1,9 +1,17 @@
 import React from "react";
+import { current } from "immer";
 
 const ActionButton = (props) => {
 
     const handlerSave = () => {
-        alert("You liked")
+        const currentStorage = localStorage.getItem('savedDrinks');
+
+        if (currentStorage === null) {
+            currentStorage = [];
+        }
+
+        currentStorage.push(JSON.stringify(props.drink))
+        localStorage.setItem('savedDrinks', currentStorage);
     }
 
     const handlerDelete = () => {

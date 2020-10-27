@@ -9,6 +9,8 @@ const Main = () => {
     const [drink, setDrink] = useState("");
     const [drinkInit, setDrinkInit] = useState(false);
 
+    localStorage.setItem('savedDrinks', null)
+
     useEffect(() => {
 
         const url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
@@ -42,8 +44,8 @@ const Main = () => {
     return(
         <div>
             { drink && <Card drink={drink}></Card>}
-            <ActionButton type="delete" />
-            <ActionButton type="save" />
+            <ActionButton type="delete" drink={drink} />
+            <ActionButton type="save" drink={drink} />
         </div>
     )
 };
